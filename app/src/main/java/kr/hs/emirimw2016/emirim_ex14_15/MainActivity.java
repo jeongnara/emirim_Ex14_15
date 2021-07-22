@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     String[] fruitsArr = {"수박", "참외", "복숭아"};
+    boolean[] checkArr = {true, false, true};
     int[] imgsArr = {R.drawable.img01, R.drawable.img02, R.drawable.img03};
     Button btnFruits;
     ImageView imgV;
@@ -41,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.btn_fruits:
                     AlertDialog.Builder fruits = new AlertDialog.Builder(MainActivity.this);
                         fruits.setTitle(R.string.btn_fruits);
-                        fruits.setSingleChoiceItems(fruitsArr, 0, fruitsItemListener);
+                        fruits.setMultiChoiceItems(fruitsArr, checkArr, fruitsMultiItemListener);
                         fruits.setIcon(R.drawable.watermelon);
                         fruits.setPositiveButton("닫기", null);
                         fruits.show();
@@ -49,6 +50,14 @@ public class MainActivity extends AppCompatActivity {
             }
 
 
+        }
+    };
+
+    DialogInterface.OnMultiChoiceClickListener fruitsMultiItemListener = new DialogInterface.OnMultiChoiceClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+            btnFruits.setText(fruitsArr[which]);
+            imgV.setImageResource(imgsArr[which]);
         }
     };
 
